@@ -9,7 +9,6 @@ COLORS = {2**x: '#{0:06x}'.format(randint(0, 16**6-1))
 			for x in range(1, GRID_SIZE**2)}
 COLORS = {0: "#808080", **COLORS}
 
-print(COLORS)
 
 class Grid(object):
 	def __init__(self):
@@ -27,20 +26,16 @@ class Grid(object):
 		for y in range(GRID_SIZE):
 			# remove 0s
 			tmp = [matrix[x, y] for x in range(GRID_SIZE) if matrix[x, y] != 0]
-			print(tmp)
 			# merge equal values
 			for i in range(len(tmp)-1):
 				if tmp[i] == tmp[i+1]:
 					tmp[i] *= 2
-					print(tmp[i])
 					self.score.set(self.score.get() + tmp[i])
 					tmp[i+1] = 0
 			# remove 0s again
 			tmp = [tmp[i] for i in range(len(tmp)) if tmp[i] != 0]
-			print(tmp)
 			# write to matrix
 			matrix[:, y] = tmp + [0 for x in range(GRID_SIZE - len(tmp))]
-			print(matrix[:, y])
 		return matrix
 
 	def new_cell(self):
